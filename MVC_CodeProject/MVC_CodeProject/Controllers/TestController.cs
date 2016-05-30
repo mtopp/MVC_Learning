@@ -21,7 +21,7 @@ namespace MVC_CodeProject.Controllers
 
     public class TestController : Controller
     {
-        //Returns string "Hello World"
+        //Returns string "Hello World".
         public string GetString()
         {
             return "Hello World";
