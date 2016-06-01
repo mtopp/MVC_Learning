@@ -1,4 +1,5 @@
-﻿
+﻿@model MVC_CodeProject.Models.Employee
+
 @{
     Layout = null;
 }
@@ -30,7 +31,26 @@
         <b>Employee Details</b><br />
         Employee Name: @empViewBag.firstName @empViewBag.lastName <br />
         @*Could also be written as "@(empViewBag.FirstName+” “+empViewBag.LastName)"*@
-        Employee Salary: @empViewBag.salary.ToString("C");
+        Employee Salary: @empViewBag.salary.ToString("C");<br /><br />
     </div>
+    <div>
+        <b>Employee Details</b><br />
+        Employee Name: @Model.firstName @Model.lastName<br />
+
+        @if(Model.salary > 15000)
+        {
+            <span style="background-color:yellow">
+                Employee Salary: @Model.salary.ToString("C")
+            </span>
+        }
+        else
+        {
+            <span style="background-color:green">
+                Employee Salary: @Model.salary.ToString("C")
+            </span>         
+        }
+
+    </div>
+        
 </body>
 </html>

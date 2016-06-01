@@ -62,7 +62,10 @@ namespace MVC_CodeProject.Controllers
 
             // ViewBag way of doing it
             ViewBag.Employee = emp;
-            return View("MyView");
+            //return View("MyView");
+
+            // Using strongly typed view
+            return View("MyView", emp);
         }
     }
 }
