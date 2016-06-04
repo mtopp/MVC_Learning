@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVC_CodeProject.Models;
+using MVC_CodeProject.ViewModels;
 
 namespace MVC_CodeProject.Controllers
 {
@@ -67,5 +68,75 @@ namespace MVC_CodeProject.Controllers
             // Using strongly typed view
             return View("MyView", emp);
         }
+
+        public ActionResult ViewVM()
+        {
+            Employee emp = new Employee();
+            emp.firstName = "Mike";
+            emp.lastName = "Topping";
+            emp.salary = 16500;
+
+            EmployeeViewModel vmEmp = new EmployeeViewModel();
+            vmEmp.employeeName = emp.firstName + " " + emp.lastName;
+            vmEmp.salary = emp.salary.ToString("C");
+
+            if (emp.salary > 15000)
+            {
+                vmEmp.salaryColour = "yellow";
+            }
+            else
+            {
+                vmEmp.salaryColour = "green";
+            }
+
+            vmEmp.userName = "Admin";
+
+            return View("MyVMView", vmEmp);
+        }
+
+        public ActionResult ViewListVM()
+        {
+            EmployeeListViewModel employeeList = new EmployeeListViewModel();
+
+            EmployeeBusinessLayer empBusiness = new EmployeeBusinessLayer();
+
+            // Populates employee list using EmployeeBusinessLayer.cs
+            List<Employee> employees = empBusiness.GetEmployees();
+
+            // Creates empty list of ViewModel employees
+            List<EmployeeViewModel> empViewModels = new List<EmployeeViewModel>();
+
+            // For each employee in populated list of employees
+            foreach (Employee empItem in employees)
+            {
+                // Creates new instance a single ViewModel employee
+                EmployeeViewModel empViewModel = new EmployeeViewModel();
+
+                // Assigns values found in list of employees (model list)
+                empViewModel.employeeName = empItem.firstName + " " + empItem.lastName;
+                empViewModel.salary = empItem.salary.ToString("C");
+
+                if (empItem.salary > 20000)
+                {
+                    empViewModel.salaryColour = "yellow";
+                }
+                else
+                {
+                    empViewModel.salaryColour = "green";
+                }
+
+                // The ViewModel employee is added to the ViewModel list of employees
+                empViewModels.Add(empViewModel);
+            }
+
+            // "employeeList" is set to = the ViewModel list of employees
+            // This is done because "empViewModels" is of a type 'List' 
+            // - and "MyVMListView" requires that a type of 'EmployeeListViewModel' is passed to it i.e. "employeeList"
+            employeeList.employees = empViewModels;
+            employeeList.userName = "Admin";
+
+            return View("MyVMListView", employeeList);
+        }
+
     }
 }

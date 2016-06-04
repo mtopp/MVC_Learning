@@ -1,0 +1,34 @@
+﻿@using MVC_CodeProject.ViewModels
+@model EmployeeListViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyVMListView</title>
+</head>
+<body>
+    Hello @Model.userName
+    <hr />
+    <div>
+        <table>
+            <tr>
+                <th>Employee Name</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (EmployeeViewModel empItem in Model.employees)
+            {
+                <tr>
+                    <td>@empItem.employeeName</td>
+                    <td style="background-color:@empItem.salaryColour">@empItem.salary</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

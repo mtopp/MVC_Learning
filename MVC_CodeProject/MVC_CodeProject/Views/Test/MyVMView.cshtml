@@ -1,0 +1,29 @@
+﻿@using MVC_CodeProject.ViewModels
+@model EmployeeViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyVMView</title>
+</head>
+<body>
+    <div>
+        Hello @Model.userName
+        <hr />
+        <div>
+            <b>Employee Details</b><br />
+            Employee Name: @Model.employeeName <br />
+            <span style="background-color:@Model.salaryColour">
+                Employee Salary: @Model.salary
+            </span>
+
+        </div>
+    </div>
+</body>
+</html>
